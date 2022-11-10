@@ -29,6 +29,7 @@
 /* ============================================================================================================== */
 #include <stdio.h>
 #include <ctype.h>
+#include <cmath>
 #include <glib.h>
 
 #include "util/bitset.c"
@@ -46,7 +47,7 @@
  * Approximate answers
  */
 void solve(struct TaskSpecification *task, struct AAF* aaf, struct Labeling* grounded){
-  if(strcmp(task->problem,"DC") == 0){
+  if(strcmp(task->problem,"DC") == 0 && strcmp(task->track,"DC-ID") != 0){
     // for credulous acceptance we always say "YES" iff the argument is not attacked by the grounded extension
     	if(bitset__get(grounded->out,task->arg)){
         printf("NO\n");
@@ -55,7 +56,7 @@ void solve(struct TaskSpecification *task, struct AAF* aaf, struct Labeling* gro
     // for skeptical acceptance we always say "YES" iff the argument is in the grounded extension
     	if(bitset__get(grounded->in,task->arg)){
         printf("YES\n");
-      }else printf("NO\n");
+      }else printf("NO\n");      
   }
   return;
 }
@@ -64,10 +65,10 @@ void solve(struct TaskSpecification *task, struct AAF* aaf, struct Labeling* gro
 int main(int argc, char *argv[]){
   // General solver information
 	struct SolverInformation *info = taas__solverinformation(
-			"taas-harper++ v1.0 (2020-12-19)\nMatthias Thimm (thimm@uni-koblenz.de)",
-			"[tgf]",
-			"[DC-CO,DS-CO,DC-PR,DS-PR,DC-ST,DS-ST,DC-SST,DS-SST,DC-STG,DS-STG,DS-ID]"
-		);    
+			"taas-harper++ v1.1 (2022-11-10)\nMatthias Thimm (matthias.thimm@fernuni-hagen.de)",
+			"[i23]",
+			"[DC-CO,DS-CO,DC-PR,DS-PR,DC-ST,DS-ST,DC-SST,DS-SST,DC-STG,DS-STG,DC-ID,DS-ID]"
+		);
   return taas__solve(argc,argv,info,solve);
 }
 
