@@ -56,7 +56,7 @@ void solve(struct TaskSpecification *task, struct AAF* aaf, struct Labeling* gro
     // for skeptical acceptance we always say "YES" iff the argument is in the grounded extension
     	if(bitset__get(grounded->in,task->arg)){
         printf("YES\n");
-      }else printf("NO\n");      
+      }else printf("NO\n");
   }
   return;
 }
@@ -65,9 +65,9 @@ void solve(struct TaskSpecification *task, struct AAF* aaf, struct Labeling* gro
 int main(int argc, char *argv[]){
   // General solver information
 	struct SolverInformation *info = taas__solverinformation(
-			"taas-harper++ v1.1 (2022-11-10)\nMatthias Thimm (matthias.thimm@fernuni-hagen.de)",
+			"taas-harper++ v1.1.1 (2023-03-30)\nMatthias Thimm (matthias.thimm@fernuni-hagen.de)",
 			"[i23]",
-			"[DC-CO,DS-CO,DC-PR,DS-PR,DC-ST,DS-ST,DC-SST,DS-SST,DC-STG,DS-STG,DC-ID,DS-ID]"
+			"[DC-CO,DS-CO,DC-PR,DS-PR,DC-ST,DS-ST,DC-SST,DS-SST,DC-STG,DS-STG,DC-ID,DS-ID,DC-GR,DS-GR]"
 		);
   return taas__solve(argc,argv,info,solve);
 }
